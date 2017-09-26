@@ -8,7 +8,7 @@ class Header extends Component{
     render(){
         return(
             <View style={stilos.container} >
-                <Toggle />
+                <Toggle touch={this.props.touchToggle} />
             </View>
         );
     }
@@ -25,5 +25,9 @@ const stilos = StyleSheet.create({
         shadowRadius: 2
     }
 })
+
+Header.PropTypes = {
+    touchToggle: PropTypes.func.isRequired
+}
 
 export default Header;

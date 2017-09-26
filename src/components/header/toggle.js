@@ -5,16 +5,14 @@ import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 class Toggle extends Component{
     constructor(props){
         super(props);
-        this.showMenu = this.showMenu.bind(this);
-    }
-
-    showMenu(){
-        Alert.alert("Hola")
     }
 
     render(){
         return(
-            <TouchableOpacity style={stilos.superContainer} onPress={this.showMenu} >
+            <TouchableOpacity 
+                style={stilos.superContainer}
+                onPress={this.props.touch} >
+                
                 <View style={stilos.container} >
                     <View style={stilos.line} />
                     <View style={stilos.line} />
@@ -50,5 +48,9 @@ const stilos = StyleSheet.create({
         borderRadius: 5
     }
 })
+
+Toggle.PropTypes = {
+    touch: PropTypes.func.isRequired
+}
 
 export default Toggle;

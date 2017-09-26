@@ -9,8 +9,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Header from './components/header';
-import Home from './components/home/';
-import Biblia from './components/biblia/';
+import Menu from './components/menu';
+import Home from './components/home';
+import Biblia from './components/biblia';
 import Himnario from './components/himnario';
 
 const { width, height } = Dimensions.get('window');
@@ -20,10 +21,20 @@ class Appventista extends Component{
         super(props);
         this.showBiblia = this.showBiblia.bind(this);
         this.showHImnario = this.showHImnario.bind(this);
+        this.showMenu = this.showMenu.bind(this);
         this.state = {
             positionLeftBiblia: new Animated.Value(-width),
-            positionLeftHimnario: new Animated.Value(width*2)
+            positionLeftHimnario: new Animated.Value(width*2),
+            positionMenu: new Animated.ValueXY({x: -width, y:-height})
         }
+    }
+
+    showMenu(){
+        Animated.timing(
+            this.state.positionMenu,{
+                toValue:{x:0, y:0}
+            }
+        ).start();
     }
 
     showBiblia(){
@@ -47,11 +58,19 @@ class Appventista extends Component{
     render(){
         return(
             <View style={styles.container} >
-                <Header />
+                <Menu position={this.state.positionMenu}/>
+                <Header touchToggle={this.showMenu} />
                 <View>
-                    <Home TouchBiblia={this.showBiblia} TouchHimnario={this.showHImnario}/>
-                    <Biblia positionLeft={this.state.positionLeftBiblia}  />
-                    <Himnario positionLeft={this.state.positionLeftHimnario} />
+                    <Home
+                        TouchBiblia={this.showBiblia}
+                        TouchHimnario={this.showHImnario}
+                        />
+                    <Biblia
+                        positionLeft={this.state.positionLeftBiblia}
+                        />
+                    <Himnario
+                        positionLeft={this.state.positionLeftHimnario}
+                        />
                 </View>
             </View>
         )
