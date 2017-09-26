@@ -1,18 +1,58 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View,
+    Text,
+    StyleSheet,
+    Dimensions,
+    Alert,
+    Animated
+} from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Toggle from './components/toggle';
+import Header from './components/header';
 import Home from './components/home/';
+import Biblia from './components/biblia/';
+import Himnario from './components/himnario';
 
-const { width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 class Appventista extends Component{
+    constructor(props){
+        super(props);
+        this.showBiblia = this.showBiblia.bind(this);
+        this.showHImnario = this.showHImnario.bind(this);
+        this.state = {
+            positionLeftBiblia: new Animated.Value(-width),
+            positionLeftHimnario: new Animated.Value(width*2)
+        }
+    }
+
+    showBiblia(){
+        Animated.timing(
+            this.state.positionLeftBiblia,
+            {
+                toValue: 0
+            }
+        ).start();
+    }
+
+    showHImnario(){
+        Animated.timing(
+            this.state.positionLeftHimnario,
+            {
+                toValue: 0
+            }
+        ).start();
+    }
+
     render(){
         return(
             <View style={styles.container} >
-                <Toggle />
-                <Home />
+                <Header />
+                <View>
+                    <Home TouchBiblia={this.showBiblia} TouchHimnario={this.showHImnario}/>
+                    <Biblia positionLeft={this.state.positionLeftBiblia}  />
+                    <Himnario positionLeft={this.state.positionLeftHimnario} />
+                </View>
             </View>
         )
     }

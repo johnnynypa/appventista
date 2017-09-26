@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 class Toggle extends Component{
+    constructor(props){
+        super(props);
+        this.showMenu = this.showMenu.bind(this);
+    }
+
+    showMenu(){
+        Alert.alert("Hola")
+    }
+
     render(){
         return(
-            <TouchableOpacity style={stilos.superContainer} >
+            <TouchableOpacity style={stilos.superContainer} onPress={this.showMenu} >
                 <View style={stilos.container} >
                     <View style={stilos.line} />
                     <View style={stilos.line} />
@@ -20,13 +29,11 @@ const tamano = 47;
 
 const stilos = StyleSheet.create({
     superContainer:{
-        elevation: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         height: tamano,
         width: tamano,
-        position: 'absolute',
-        top: 10,
-        left: 10,
+        top: 4,
+        left: 7,
         borderRadius: tamano/2,
         justifyContent: 'center',
         alignItems: 'center'

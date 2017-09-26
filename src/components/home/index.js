@@ -21,10 +21,12 @@ class Home extends Component{
 
         const stilos = StyleSheet.create({
             containerHome:{
-                height: height,
+                elevation:1,
+                height: height-55,
                 width: width,
                 display: 'flex',
-                flexDirection: 'row'
+                flexDirection: 'row',
+                position: 'absolute'
             },
             btn:{
                 width: width*0.5,
@@ -53,6 +55,9 @@ class Home extends Component{
             },
             touchable:{
                 alignItems: 'center'
+            },
+            rectangle:{
+                marginTop: -55
             }
         })
 
@@ -60,8 +65,8 @@ class Home extends Component{
             <Animated.View style={stilos.containerHome} >
                 {/* BtnBiblia */}
                 <Animated.View style={[stilos.btn, stilos.btnBiblia]} >
-                    <Image source={Rectangle} />
-                    <TouchableHighlight>
+                    <Image source={Rectangle} style={stilos.rectangle} />
+                    <TouchableHighlight onPress={this.props.TouchBiblia} >
                         <View style={stilos.touchable} >
                             <Image source={IconBiblia} style={[stilos.IconBiblia, stilos.icon]}/>
                             <Text style={stilos.txtBtn} > Santa Biblia </Text>
@@ -71,7 +76,7 @@ class Home extends Component{
 
                 {/* BtnHImnario */}
                 <Animated.View style={[stilos.btn, stilos.btnHimnario]} >
-                    <TouchableHighlight>
+                    <TouchableHighlight onPress={this.props.TouchHimnario} >
                         <View style={stilos.touchable}>
                             <Image source={IconHimnario} style={stilos.icon} />
                             <Text style={stilos.txtBtn} > Himnario </Text>
